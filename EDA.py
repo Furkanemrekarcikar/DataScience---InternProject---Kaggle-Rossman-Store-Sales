@@ -88,6 +88,16 @@ df['Customers_log'] = np.log1p(df['Customers'])
 
 num_cols = df.select_dtypes(include=['int64', 'float64'])
 num_cols.columns
+
+for col in num_cols.columns:
+    plt.figure(figsize=(8, 4))
+    sns.histplot(df[col].dropna(), bins=30, kde=True)
+    plt.title(f"Histogram - {col}")
+    plt.xlabel(col)
+    plt.ylabel("Frekans")
+    plt.show()
+
 table = detect_outliers_iqr(df,num_cols)
 pd.DataFrame(table).T
+
 
